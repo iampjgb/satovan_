@@ -1,10 +1,11 @@
-import { Login } from "./pages/Login";
+import { Register } from "./pages/Register/Register";
+import { Login } from "./pages/Register/Login";
 
 
 function App() {
   return (
     <div className="App">
-      hello bambi
+      {/* <Register/> */}
       <Login/>
     </div>
   );
