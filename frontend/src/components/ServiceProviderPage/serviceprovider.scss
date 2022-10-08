@@ -1,0 +1,75 @@
+$base-color: #A763FF;
+$base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
+// body * {
+//     border: 1px solid pink;
+// }
+.container {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    .serviceProviderAvatar {
+        width: 95vw;
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+        margin-top: 20px;
+        min-height: fit-content;
+        gap: 0.5rem;
+        .header {
+            display: flex;
+            .profile {
+                img {
+                    width: 60px;
+                    height: 60px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    border: 1px solid white;
+                }
+            }
+        }
+        .header-info {
+            h1 {
+                font-size: 20px;
+                margin-top: 3px;
+            }
+            .details {
+                display: flex;
+                align-items: center;
+                gap: .25rem;
+                font-size: 14px;
+                font-weight: bold;
+                .review-counts,
+                .address {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+                .star-icon {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+    .contact {
+        display: flex;
+        gap: .5rem;
+        .message,
+        .call {
+            margin: 0 auto;
+            margin-top: 10px;
+            padding: 10px;
+            width: 100px;
+            gap: .5rem;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            border-radius: 30px;
+            font-size: 12px;
+            box-shadow: $base-box-shadow;
+            cursor: pointer;
+            &:hover {
+                background-color: $base-color;
+                color: white;
+            }
+        }
+    }
+}

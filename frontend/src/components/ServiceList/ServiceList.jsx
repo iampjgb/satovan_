@@ -13,7 +13,7 @@ const serviceItems=[
     {
     id:1,
     name:'Mr. Karpintero',
-    area:'Malabon',
+    area:'Navotas',
     price:2160,
     image:require('/Users/paulbaron/CAPSTONE/frontend/src/assets/services/carpenter.webp'),
     rate:4.5,
@@ -46,6 +46,43 @@ const serviceItems=[
     rate:4.2,
     rateCount:420
     },
+    {
+        id:5,
+        name:'Mr. Karpintero',
+        area:'Navotas',
+        price:2160,
+        image:require('/Users/paulbaron/CAPSTONE/frontend/src/assets/services/carpenter.webp'),
+        rate:4.5,
+        rateCount:32
+        },
+        {
+        id:6,
+        name:'Mang Pepe',
+        area:'Malabon',
+        price:2000,
+        image:require('/Users/paulbaron/CAPSTONE/frontend/src/assets/services/carpenter_2.jpeg'),
+        rate:4.8,
+        rateCount:120
+        },
+        {
+        id:7,
+        name:'Caloocan Boy',
+        area:'Caloocan',
+        price:1000,
+        image:require('/Users/paulbaron/CAPSTONE/frontend/src/assets/services/carpenter_3.jpeg'),
+        rate:5,
+        rateCount:1000
+        },
+        {
+        id:8,
+        name:'Batang Tondo',
+        area:'Manila',
+        price:1700,
+        image:require('/Users/paulbaron/CAPSTONE/frontend/src/assets/services/carpenter_4.jpeg'),
+        rate:4.2,
+        rateCount:420
+        },
+        
     
 ];
 

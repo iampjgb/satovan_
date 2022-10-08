@@ -1,0 +1,12 @@
+$base-color: #A763FF;
+$base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
+// body * {
+//     border: 1px solid pink;
+// }
+.ServiceProviderOffers {
+    margin: 0 auto;
+    margin-top: 20px;
+    height: 40px;
+    width: 100px;
+    background-color: $base-color;
+}

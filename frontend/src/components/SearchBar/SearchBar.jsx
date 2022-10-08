@@ -11,7 +11,7 @@ export const SearchBar = () => {
                 <RoomIcon className='searchbar-icons'/>
             </div> */}
             <div className='searchbar-right'>
-                <input type="text" placeholder='What type of service you are looking for?' />
+                <input type="text" placeholder='What type of service are you looking for?' />
                 <SearchIcon className='searchbar-icons'/>
             </div>
         </form>
