@@ -1,0 +1,50 @@
+$base-color: #A763FF;
+$base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+.searchbar {
+    min-width: 30vw;
+    height: 66px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 50px;
+    box-shadow: $base-box-shadow;
+    &-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        gap: 0.5rem;
+        .searchbar-left {
+            display: flex;
+            align-items: center;
+            gap: .25rem;
+            .searchbar-icons {
+                padding: 5px;
+                background-color: $base-color;
+                color: white;
+                border-radius: 50%;
+                font-size: 18px;
+            }
+        }
+        .searchbar-right {
+            display: flex;
+            align-items: center;
+            gap: .25rem;
+            .searchbar-icons {
+                padding: 5px;
+                background-color: $base-color;
+                color: white;
+                border-radius: 50%;
+                font-size: 20px;
+            }
+            input {
+                padding: 8px;
+                width: 25vw;
+                border: none;
+                outline: none;
+                text-align: center;
+            }
+        }
+    }
+}

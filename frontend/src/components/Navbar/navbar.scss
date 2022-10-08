@@ -1,0 +1,46 @@
+$base-color: #A763FF;
+$base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+.navbar {
+    width: 100vw;
+    max-width: 100vw;
+    height: 80px;
+    color: $base-color;
+    box-shadow: $base-box-shadow;
+    &-wrapper {
+        width: 95vw;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        .navbar-left {
+            .logo {
+                cursor: pointer;
+                font-weight: 900;
+            }
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            .join {
+                cursor: pointer;
+                font-weight: bold;
+                color: black;
+            }
+            .login {
+                display: flex;
+                gap: .5rem;
+                padding: 10px;
+                border-radius: 10px;
+                color: black;
+                cursor: pointer;
+                .profileIcon {
+                    font-size: 25px;
+                }
+            }
+        }
+    }
+}
