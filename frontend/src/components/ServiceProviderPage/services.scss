@@ -1,0 +1,58 @@
+$base-color: #A763FF;
+$base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
+// body * {
+//     border: 1px solid pink;
+// }
+.service-lists {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    .item {
+        padding: 10px;
+        box-shadow: $base-box-shadow;
+        width: 85%;
+        margin: 0 auto;
+        .header {
+            padding: 5px;
+            span {
+                font-weight: bold;
+                font-size: 14px;
+                .item {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    .quantity {
+                        display: flex;
+                        gap: 0.5rem;
+                    }
+                }
+            }
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            .price {
+                margin-top: 3px;
+            }
+            .quantity {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                margin-top: 3px;
+                .minus,
+                .plus {
+                    background-color: $base-color;
+                    color: white;
+                    font-weight: bold;
+                    border-radius: 50%;
+                    width: 15px;
+                    text-align: center;
+                    padding: 6px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

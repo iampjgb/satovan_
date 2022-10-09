@@ -1,0 +1,73 @@
+$base-color: #A763FF;
+$base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
+// body * {
+//     border: 1px solid pink;
+// }
+.schedule {
+    // margin-top: 50px;
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        .content {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        input[type=date] {
+            width: 25%;
+            padding: 10px;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid black;
+            text-align: center;
+            font-family: 'Roboto';
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            &::-webkit-calendar-picker-indicator {
+                cursor: pointer;
+            }
+        }
+    }
+    position: relative;
+    .times {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        .time {
+            padding: 5px;
+            width: 90px;
+            font-size: 12px;
+            background-color: white;
+            color: $base-color;
+            border: 1px solid $base-color;
+            border-radius: 999px;
+            text-align: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+    }
+    .navigate-before-icon {
+        font-size: 40px;
+        color: $base-color;
+        font-weight: bold;
+        position: absolute;
+        right: 95%;
+        top: 50%;
+        cursor: pointer;
+    }
+    .navigate-next-icon {
+        font-size: 40px;
+        color: $base-color;
+        font-weight: bold;
+        position: absolute;
+        left: 95%;
+        top: 50%;
+        cursor: pointer;
+    }
+}

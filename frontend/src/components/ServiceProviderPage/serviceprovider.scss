@@ -7,14 +7,15 @@ $base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
     min-height: 200px;
     display: flex;
     flex-direction: column;
+    height: 80px;
     .serviceProviderAvatar {
         width: 95vw;
         display: flex;
         margin: 0 auto;
         justify-content: center;
-        margin-top: 20px;
         min-height: fit-content;
         gap: 0.5rem;
+        position: relative;
         .header {
             display: flex;
             .profile {
@@ -28,9 +29,26 @@ $base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
             }
         }
         .header-info {
-            h1 {
-                font-size: 20px;
-                margin-top: 3px;
+            .title {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+                justify-content: space-around;
+                position: relative;
+                h1 {
+                    font-size: 20px;
+                }
+                .online {
+                    color: black;
+                    padding: 5px;
+                    font-size: 10px;
+                    font-weight: bold;
+                }
+                .dot {
+                    color: #0CFE27;
+                    font-size: 50px;
+                    text-shadow: -4px 0px 13px rgba(12, 254, 39, 0.6);
+                }
             }
             .details {
                 display: flex;
@@ -39,7 +57,7 @@ $base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
                 font-size: 14px;
                 font-weight: bold;
                 .review-counts,
-                .address {
+                .hires {
                     text-decoration: underline;
                     cursor: pointer;
                 }
@@ -66,10 +84,34 @@ $base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
             font-size: 12px;
             box-shadow: $base-box-shadow;
             cursor: pointer;
-            &:hover {
-                background-color: $base-color;
-                color: white;
+        }
+        .message:hover {
+            background-color: $base-color;
+            color: white
+        }
+        .call:hover {
+            background-color: #4CD460;
+            color: white
+        }
+    }
+    .cart {
+        display: flex;
+        align-items: flex-start;
+        position: absolute;
+        margin-left: 450px;
+        .icon {
+            .cart-icon {
+                font-size: 24px;
             }
         }
+    }
+    .count {
+        font-size: 10px;
+        border-radius: 999px;
+        background-color: red;
+        color: white;
+        padding: 1px 4px;
+        position: absolute;
+        margin-left: 16px;
     }
 }

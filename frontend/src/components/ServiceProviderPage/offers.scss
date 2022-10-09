@@ -1,0 +1,53 @@
+$base-color: #A763FF;
+$base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
+// body * {
+//     border: 1px solid pink;
+// }
+.container {
+    position: relative;
+    .content {
+        // text-align: left;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .offers {
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        .item {
+            cursor: pointer;
+            .details {
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                gap: 0.25rem;
+                .name {
+                    font-size: 14px;
+                    padding: 10px;
+                    color: $base-color;
+                    border: 1px solid $base-color;
+                    text-align: center;
+                    border-radius: 999px;
+                    font-weight: bold;
+                }
+                .price {
+                    text-align: center;
+                    font-size: 12px;
+                    font-weight: 400;
+                    color: black;
+                }
+            }
+        }
+    }
+    .navigate-icon {
+        font-size: 40px;
+        color: $base-color;
+        font-weight: bold;
+        position: absolute;
+        left: 95%;
+        top: 50%;
+        cursor: pointer;
+    }
+}
