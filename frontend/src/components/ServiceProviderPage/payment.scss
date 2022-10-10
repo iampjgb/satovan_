@@ -1,0 +1,163 @@
+    $base-color: #A763FF;
+    $base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
+    // body * {
+    //     border: 1px solid pink;
+    // }
+    .border-outline {
+        border: 1px solid gray;
+    }
+    
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    
+    .payment {
+        position: relative;
+        width: 70%;
+        box-shadow: $base-box-shadow;
+        padding: 20px;
+        border-radius: 30px;
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            .content {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                font-weight: bold;
+                text-align: center;
+            }
+        }
+        .options {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex: 1;
+                input[type=radio] {
+                    cursor: pointer;
+                }
+                label {
+                    font-size: 12px;
+                }
+                padding: 8px;
+            }
+        }
+        .card-inputs,
+        .gcash-paymaya {
+            margin-top: 10px;
+            .item {
+                display: flex;
+                flex-direction: column;
+                gap: .2rem;
+                margin-bottom: 20px;
+                input[type=text],
+                input[type=number] {
+                    padding: 8px;
+                    text-align: center;
+                    outline: none;
+                    border: none;
+                    // border-radius: 5px;
+                    // border: 0.5px solid gray;
+                }
+                label {
+                    font-size: 12px;
+                    text-indent: 10px;
+                }
+                .images {
+                    display: flex;
+                    justify-content: flex-end;
+                    gap: 0rem;
+                    img {
+                        width: 30px;
+                        object-fit: contain;
+                    }
+                }
+                .images-local {
+                    display: flex;
+                    justify-content: flex-end;
+                    gap: 0rem;
+                    img {
+                        width: 50px;
+                        object-fit: contain;
+                    }
+                }
+            }
+            .card-group {
+                display: flex;
+                justify-content: space-between;
+                border: 1px solid gray;
+                 :nth-child(1) {
+                    flex: 3;
+                    border: none;
+                    outline: none;
+                }
+                 :nth-child(2) {
+                    flex: 1;
+                    margin-right: 15px;
+                }
+                button {
+                    background-color: transparent;
+                    border: none;
+                    padding: 3px;
+                }
+            }
+            .item-group {
+                display: flex;
+                gap: .25rem;
+                justify-content: flex-start;
+                .item {
+                    display: flex;
+                    width: 70px;
+                    justify-content: space-between;
+                    label {
+                        font-size: 12px;
+                        text-indent: 10px;
+                    }
+                    input[type=number] {
+                        border: 1px solid gray;
+                    }
+                }
+            }
+        }
+        // .navigate-before-icon {
+        //     font-size: 40px;
+        //     color: $base-color;
+        //     font-weight: bold;
+        //     position: absolute;
+        //     right: 95%;
+        //     top: 50%;
+        //     cursor: pointer;
+        // }
+        // .navigate-next-icon {
+        //     font-size: 40px;
+        //     color: $base-color;
+        //     font-weight: bold;
+        //     position: absolute;
+        //     left: 95%;
+        //     top: 50%;
+        //     cursor: pointer;
+        // }
+        .btn-pay {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .item {
+                padding: 14px;
+                width: 100%;
+                background-color: $base-color;
+                color: white;
+                border: none;
+                border-radius: 999px;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 14px;
+            }
+        }
+    }

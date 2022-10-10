@@ -1,0 +1,48 @@
+$base-color: #A763FF;
+$base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
+.review-container {
+    border-bottom: 1px solid lightgray;
+    p {
+        font-size: 12px;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+    .review {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 5px;
+            .name {
+                font-size: 12px;
+                text-transform: capitalize;
+                font-weight: bold;
+            }
+            .rating {
+                font-size: 14px;
+            }
+            .avatar {
+                img {
+                    width: 30px;
+                    height: 30px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+        }
+        .info {
+            display: flex;
+            flex-direction: column;
+        }
+        .date {
+            font-size: 10px;
+            align-self: flex-start;
+            color: gray;
+            font-weight: bold;
+        }
+    }
+}

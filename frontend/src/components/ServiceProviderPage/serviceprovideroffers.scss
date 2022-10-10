@@ -27,7 +27,8 @@ $base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
         cursor: pointer;
         .services,
         .schedule,
-        .payment {
+        .payment,
+        .confirm {
             display: flex;
             flex-direction: column;
             align-items: center;

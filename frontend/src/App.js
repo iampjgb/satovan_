@@ -6,6 +6,11 @@ import { CategoryNav } from "./components/CategoryNav/CategoryNav";
 import { ServiceList } from "./components/ServiceList/ServiceList";
 import { ServiceProviderAvatar } from "./components/ServiceProviderPage/ServiceProviderAvatar.jsx";
 import { ServiceProviderOffers } from "./components/ServiceProviderPage/ServiceProviderOffers";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 
 
 function App() {

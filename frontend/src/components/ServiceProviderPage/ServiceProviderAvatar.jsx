@@ -26,10 +26,10 @@ export const ServiceProviderAvatar = () => {
                         <span className='hires'>135 hires</span>
                     </div>
                 </div>
-                <div className='cart'>
+                {/* <div className='cart'>
                     <span className='icon'><LocalMallIcon className='cart-icon'/></span>
                     <span className='count'>1</span>
-                </div>
+                </div> */}
             </div>
             <div className='contact'>
                 <div className='message'>

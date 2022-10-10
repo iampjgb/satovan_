@@ -85,6 +85,12 @@ $base-box-shadow:rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
             box-shadow: $base-box-shadow;
             cursor: pointer;
         }
+        .message {
+            border: 1px solid $base-color;
+        }
+        .call {
+            border: 1px solid green;
+        }
         .message:hover {
             background-color: $base-color;
             color: white
