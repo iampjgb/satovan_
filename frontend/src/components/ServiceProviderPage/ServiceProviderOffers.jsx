@@ -4,6 +4,7 @@ import { Schedule } from './Schedule';
 import {Payment}  from './Payment';
 import { PaymentSuccess } from './PaymentSuccess';
 import { Reviews } from '../Reviews/Reviews';
+import { Call } from '../Call/Call';
 
 export const ServiceProviderOffers = () => {
     return (
@@ -31,12 +32,13 @@ export const ServiceProviderOffers = () => {
                 <span className='order'>4</span>
                 <span className='name'>Confirm</span>
             </div>
-        </div> */}
-        {/* <Offers/> */}
-        {/* <Schedule/> */}
-        {/* <Payment/> */}
-        {/* <PaymentSuccess/> */}
-        {/* <Reviews/> */}
+        </div> 
+        <Offers/>
+        <Schedule/>
+        <Payment/>
+        <PaymentSuccess/>
+        <Reviews/>  */}
+        {/* <Call/> */}
     </div>
     )
 }

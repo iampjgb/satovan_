@@ -19,7 +19,7 @@ function App() {
       <Navbar/>
       {/* <CategoryNav/>
       <ServiceList/> */}
-      <ServiceProviderAvatar/>
+      {/* <ServiceProviderAvatar/> */}
       <ServiceProviderOffers/>
       {/* <Register/> */}
       {/* <Login/> */}
