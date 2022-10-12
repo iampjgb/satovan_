@@ -11,21 +11,25 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { ChatComponent } from "./components/ChatComponent/ChatComponent";
+import { SignIn } from "./components/SignIn/SignIn";
+import { AuthContextProvider } from "./context/AuthContext";
 
 
 
 function App() {
   return (
-    <div className="App">
-      <Navbar/>
+   <AuthContextProvider>
+       <div className="App">
+      {/* <Navbar/> */}
       {/* <CategoryNav/>
       <ServiceList/> */}
       {/* <ServiceProviderAvatar/> */}
       {/* <ServiceProviderOffers/> */}
       {/* <Register/> */}
-      {/* <Login/> */}
-      <ChatComponent/>
+      <SignIn/>
+      {/* <ChatComponent/> */}
     </div>
+   </AuthContextProvider>
   );
 }
 

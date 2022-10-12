@@ -2,12 +2,21 @@ import React from 'react';
 import { useState } from 'react';
 import { LoginFormInput } from './LoginFormInput';
 import './register.scss';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import {auth} from '/Users/paulbaron/CAPSTONE/frontend/src/firebase.js';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 
 export const Login = () => {
 
+    const [email,setEmail]=useState('');
+    const [password,setPassword]=useState('');
+    const [user,setUser]=useState('');
+    const [value,setValue]=useState('');
+
     const [loginData,setLoginData]=useState({
-        email:'',
-        password:'',
+        email:email,
+        password:password,
     });
 
     const inputs=[
@@ -32,21 +41,43 @@ export const Login = () => {
     },
 ]
 
+
     const handleSubmit=e=>{
         e.preventDefault();
+        // const auth = auth();
+        setEmail(loginData.email);
+        setPassword(loginData.password);
+        console.log(loginData);
+        signInWithEmailAndPassword(auth, email, password)
+        // createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log(user);
+                setUser(email);
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(error.code);
+            });
+
     }
 
     const onChange=e=>{
         setLoginData({...loginData,[e.target.name]:e.target.value});
+        // console.log(loginData);
     }
     return (
     <div className='container'>
         <form onSubmit={handleSubmit}>
-            <h1>Login</h1>
-            {inputs.map((input)=>
-                <LoginFormInput key={input.id} {...input} value={loginData[input.name]} onChange={onChange}/>
-            )}
-            <input type="submit" value='Login' />
+        <PhoneInput
+  international
+  countryCallingCodeEditable={false}
+  defaultCountry="RU"
+  value={value}
+  onChange={setValue}/>
         </form>
     </div>
     )

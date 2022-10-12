@@ -1,0 +1,143 @@
+$base-color: #A763FF;
+$base-box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+// body * {
+//     border: 1px solid pink;
+// }
+.sign-in-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    form {
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        padding: 30px;
+        border-radius: 30px;
+        box-shadow: $base-box-shadow;
+        min-width: 360px;
+        hr {
+            border: 0.5px solid lightgray;
+        }
+        .sign-in-container-header {
+            font-size: 14px;
+            font-weight: normal;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .sign-in-container-welcome {
+            font-size: 24px;
+            font-weight: 400;
+            padding: 10px 0px 10px 0px;
+            text-align: center;
+        }
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid lightgray;
+            // border-radius: 10px;
+            padding: 5px;
+            font-size: 12px;
+            label {
+                color: gray;
+                font-size: 12px;
+                margin-left: 2px;
+            }
+            .country-dropdown,
+            .phone-number {
+                padding: 5px 36px 5px 0px;
+                text-align-last: left;
+                border: none;
+                outline: none;
+                font-size: 14px;
+                align-self: center;
+                width: 100%;
+            }
+            .phone-group {
+                display: flex;
+                align-items: center;
+                div {
+                    padding: 10px;
+                    span {
+                        flex: 1;
+                        text-align: center;
+                        color: #262626;
+                        display: inline-block;
+                        font-size: 14px;
+                    }
+                }
+                input[type=number] {
+                    flex: 8;
+                    border-left: 1px solid lightgray;
+                    width: 100%;
+                    color: #262626;
+                }
+            }
+        }
+        .auth-btn {
+            margin: 10px 0px 10px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            img {
+                width: 30px;
+                height: 30px;
+                object-fit: cover;
+                padding: 0px 10px 0px 10px;
+                // flex: 2;
+            }
+            span {
+                text-align: center;
+                // flex: 1;
+            }
+            &.other-auth {
+                border: 1px solid gray;
+                padding: 5px;
+                font-size: 12px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                .auth-logo {
+                    flex-basis: 2;
+                }
+                .auth-description {
+                    flex-basis: 10;
+                }
+            }
+            &:hover {
+                background-color: lightgray;
+            }
+            .phone-auth-btn {
+                background-color: $base-color;
+                color: white;
+                border: none;
+                padding: 15px 10px;
+                font-weight: bold;
+                width: 100%;
+                font-size: 16px;
+                // border-radius: 15px;
+                cursor: pointer;
+            }
+        }
+        .phone-horizontal-line {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            color: gray;
+            font-size: 12px;
+            .hr {
+                border: 0.5px solid lightgray;
+                width: 48%;
+            }
+            span {
+                padding: 5px;
+            }
+        }
+    }
+}
