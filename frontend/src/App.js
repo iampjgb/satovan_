@@ -1,5 +1,3 @@
-import { Register } from "./components/Register/Register";
-import { Login } from "./components/Register/Login";
 import { Navbar } from "./components/Navbar/Navbar";
 import { SearchBar } from "./components/SearchBar/SearchBar";
 import { CategoryNav } from "./components/CategoryNav/CategoryNav";
@@ -20,13 +18,12 @@ function App() {
   return (
    <AuthContextProvider>
        <div className="App">
-      {/* <Navbar/> */}
-      {/* <CategoryNav/>
-      <ServiceList/> */}
+      <Navbar/>
+       <CategoryNav/>
+      <ServiceList/> 
       {/* <ServiceProviderAvatar/> */}
       {/* <ServiceProviderOffers/> */}
-      {/* <Register/> */}
-      <SignIn/>
+      {/* <SignIn/> */}
       {/* <ChatComponent/> */}
     </div>
    </AuthContextProvider>

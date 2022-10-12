@@ -6,6 +6,9 @@ import {
     signOut,
     onAuthStateChanged,
     FacebookAuthProvider,
+    RecaptchaVerifier,
+    PhoneAuthProvider,
+    signInWithPhoneNumber
 } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -31,6 +34,15 @@ export const AuthContextProvider = ({ children }) => {
         signOut(auth);
     };
 
+    const showRecaptchaVerifier=(number)=>{
+        const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container',
+        {},
+        auth
+        );
+        recaptchaVerifier.render();
+        return signInWithPhoneNumber(auth,number,recaptchaVerifier);
+    }
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
@@ -42,7 +54,7 @@ export const AuthContextProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ googleSignIn,facebookSignIn, logOut, user }}>
+        <AuthContext.Provider value={{ googleSignIn,facebookSignIn, logOut, user,showRecaptchaVerifier }}>
             {children}
         </AuthContext.Provider>
     );

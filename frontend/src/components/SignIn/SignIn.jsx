@@ -23,10 +23,13 @@ export const SignIn = () => {
     const [digits,setDigits]=useState('');
     const [country, setCountry] = useState("PH");
     const [showEmail,setShowEmail]=useState(false);
+    const [otp,setOtp]=useState('');
+    const [otpResponse,setOtpResponse]=useState('');
+    const [error,setError]=useState('');
     const [showRegistrationForm,setShowRegistrationForm]=useState(true);
-    const formRef=useRef();
 
-    const{googleSignIn,facebookSignIn,user}=UserAuth();
+
+    const{googleSignIn,facebookSignIn,user,showRecaptchaVerifier}=UserAuth();
 
     const CountrySelect = ({ value, onChange, labels, ...rest }) => (
         <select
@@ -57,7 +60,7 @@ export const SignIn = () => {
 
     const handleSubmit=e=>{
         e.preventDefault();
-        console.log(email,password);
+        // console.log(email,password);
         signInWithEmailAndPassword(auth, email, password)
         // createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -80,6 +83,7 @@ export const SignIn = () => {
     const handleGoogleSignIn=async()=>{
         try {
             await googleSignIn();
+            setShowRegistrationForm(false);
         } catch (error) {
             console.log(error);
         }
@@ -88,14 +92,45 @@ export const SignIn = () => {
     const handleFacebookSignIn=async()=>{
         try {
             await facebookSignIn();
+            setShowRegistrationForm(false);
         } catch (error) {
             console.log(error);
         }
     }
+
+    const handlePhone = async(e)=>{
+        e.preventDefault();
+        setError('');
+        if(contact===''||null||undefined)
+        return setError('Please input a valid number');
+        try {
+        const res=await showRecaptchaVerifier("+"+digits+contact);
+        console.log(res);
+        setOtpResponse(res);
+        } catch (error) {
+                setError(error.message);
+                console.log(error);
+        }
+        console.log("+"+digits+contact);
+    }
+
+    const verifyOtp=async(e)=>{
+    e.preventDefault();
+    if(otp===''||otp==='null') return;
+        try {
+            setError('');
+            await otpResponse.confirm(otp);
+            setShowRegistrationForm(false);
+        } catch (error) {
+            setError(error.message);
+            console.log(error);
+        }
+    }
+
     return (
     <>
     {showRegistrationForm? <div className="sign-in-container">
-            <form onSubmit={handleSubmit} ref={formRef}>
+            <form onSubmit={showEmail?handleSubmit:handlePhone}>
                 <h1 className="sign-in-container-header">Login or Sign Up</h1>
                 <hr />
                 <h1 className="sign-in-container-welcome">
@@ -124,6 +159,8 @@ export const SignIn = () => {
                         type="number"
                         className="phone-number"
                         autoComplete="tel-national"
+                        value={contact}
+                        onChange={e=>setContact(e.target.value)}
                     />
                 </div>
             </div>
@@ -195,8 +232,15 @@ export const SignIn = () => {
                     </div>
                 </div>:''}
             </form>
+            {/* <div id='recaptcha-container'></div>
+            <form onSubmit={verifyOtp}>
+                <input type="text"    value={otp}
+                        onChange={e=>setOtp(e.target.value)} />
+                <button type="submit">Confirm OTP</button>
+            </form> */}
         </div>
     :''}
+    
     </>
     );
 };
