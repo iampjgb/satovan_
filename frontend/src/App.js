@@ -16,17 +16,17 @@ import { AuthContextProvider } from "./context/AuthContext";
 
 function App() {
   return (
-   <AuthContextProvider>
-       <div className="App">
+    <AuthContextProvider>
+      <div className="App">
       <Navbar/>
-       <CategoryNav/>
+      <CategoryNav/>
       <ServiceList/> 
-      {/* <ServiceProviderAvatar/> */}
-      {/* <ServiceProviderOffers/> */}
-      {/* <SignIn/> */}
+      {/* <ServiceProviderAvatar/>
+      <ServiceProviderOffers/> */}
+      <SignIn/>
       {/* <ChatComponent/> */}
     </div>
-   </AuthContextProvider>
+    </AuthContextProvider>
   );
 }
 

@@ -28,6 +28,9 @@ rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
                 // max-width: 85px;
             }
         }
+        &:hover {
+            filter: brightness(80%);
+        }
         .filter {
             display: flex;
             align-items: center;

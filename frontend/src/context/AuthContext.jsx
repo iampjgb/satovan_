@@ -34,13 +34,12 @@ export const AuthContextProvider = ({ children }) => {
         signOut(auth);
     };
 
-    const showRecaptchaVerifier=(number)=>{
-        const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container',
-        {},
-        auth
-        );
-        recaptchaVerifier.render();
-        return signInWithPhoneNumber(auth,number,recaptchaVerifier);
+    const generateRecaptcha=()=>{
+        window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+            'size': 'invisible',
+            'callback': (response) => {
+            }
+        }, auth);
     }
 
     useEffect(() => {
@@ -53,8 +52,10 @@ export const AuthContextProvider = ({ children }) => {
         };
     }, []);
 
+
+
     return (
-        <AuthContext.Provider value={{ googleSignIn,facebookSignIn, logOut, user,showRecaptchaVerifier }}>
+        <AuthContext.Provider value={{ googleSignIn,facebookSignIn, logOut, user,generateRecaptcha }}>
             {children}
         </AuthContext.Provider>
     );
