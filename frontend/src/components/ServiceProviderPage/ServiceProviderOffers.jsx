@@ -9,7 +9,7 @@ import { Call } from '../Call/Call';
 export const ServiceProviderOffers = () => {
     return (
     <div className='ServiceProviderOffers'>
-        {/* <div className='about'>
+        <div className='about'>
             <p>We are a professional carpentry company that has been in business for over 10 years. We specialize in custom woodwork, and have a wide range of satisfied customers. Our work is of the highest quality, and we take pride in our craftsmanship.</p>
         </div>
         <div className='menu'>
@@ -37,8 +37,8 @@ export const ServiceProviderOffers = () => {
         <Schedule/>
         <Payment/>
         <PaymentSuccess/>
-        <Reviews/>  */}
-        {/* <Call/> */}
+        <Reviews/>  
+        <Call/> 
     </div>
     )
 }

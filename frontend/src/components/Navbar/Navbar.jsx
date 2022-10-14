@@ -6,13 +6,22 @@ import { SearchBar } from '../SearchBar/SearchBar';
 
 //import FormModal Context
 import {SignInModal } from "../../context/FormModalContext";
+import { ProfileNavCard } from '../ProfileNavCard/ProfileNavCard';
+
+
+//import UserAuth Context
+import { UserAuth } from "../../context/AuthContext";
+import { ProfileNavCardSignedIn } from '../ProfileNavCard/ProfileNavCardSignedIn';
 
 export const Navbar = () => {
 
 //import functions and values from FormModal Context
-const{handleFormModal}=SignInModal();
+const{formModal,handleFormModal,profileNavModal,handleProfileNavModal}=SignInModal();
+  //import functions and values from UserAuth Context
+const{googleSignIn,facebookSignIn,user,generateRecaptcha}=UserAuth();
 
     return (
+        <>
     <div className='navbar'>
         <div className='navbar-wrapper'>
             <div className='navbar-left'>
@@ -21,15 +30,18 @@ const{handleFormModal}=SignInModal();
             <div className='navbar-mid'>
                 <SearchBar/>
             </div>
-            <div className='navbar-right'>
-                <span className='join'>Join as a Professional </span>
-                <div className='login' >
-                    <MenuIcon className='profileIcon' onClick={handleFormModal}/>
+            <div className='navbar-right' >
+                <span className='join'>{user? user.displayName :'Join as a Professional'} </span>
+                <div className='login' onClick={handleProfileNavModal}>
+                    <MenuIcon className='profileIcon' />
                     <AccountCircleIcon className='profileIcon'/>
                 </div>
             </div>
         </div>
+        {profileNavModal ?(user?<ProfileNavCardSignedIn/>:<ProfileNavCard/>):''}
     </div>
-    
+
+    {formModal?<div className="modal show-modal"></div>:''}
+    </>
     )
 }

@@ -5,7 +5,7 @@ import "./signin.scss";
 import { useEffect,useState } from "react";
 
 //import firebase auth initizialization and hooks
-import {auth} from '/Users/paulbaron/CAPSTONE/frontend/src/firebase.js';
+import {auth,db} from '/Users/paulbaron/CAPSTONE/frontend/src/firebase.js';
 import { signInWithEmailAndPassword, 
         createUserWithEmailAndPassword,
         signInWithPhoneNumber
@@ -28,6 +28,10 @@ import {SignInModal } from "../../context/FormModalContext";
 
 //import MUI Icons
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import CloseIcon from '@mui/icons-material/Close';
+
+
+import {doc,setDoc} from "firebase/firestore";
 
 export const SignIn = () => {
     const [email,setEmail]=useState('');
@@ -56,9 +60,8 @@ export const SignIn = () => {
     const{googleSignIn,facebookSignIn,user,generateRecaptcha}=UserAuth();
 
     //import functions and values from FormModal Context
-const{formModal}=SignInModal();
+const{formModal,setFormModal,handleFormModal,profileNavModal,handleProfileNavModal}=SignInModal();
 
-console.log(formModal);
 
     const CountrySelect = ({ value, onChange, labels, ...rest }) => (
         <select
@@ -90,14 +93,16 @@ console.log(formModal);
     const handleSubmit=e=>{
         e.preventDefault();
         // console.log(email,password);
-        signInWithEmailAndPassword(auth, email, password)
-        // createUserWithEmailAndPassword(auth, email, password)
+        // signInWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
                 const authUser = userCredential.user;
                 setShowRegistrationForm(false);
+                setFormModal(false);
                 console.log(authUser);
                 console.log(showRegistrationForm);
+
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -109,7 +114,7 @@ console.log(formModal);
     const handleGoogleSignIn=async()=>{
         try {
             await googleSignIn();
-            setShowRegistrationForm(false);
+            setFormModal(false);
         } catch (error) {
             console.log(error);
         }
@@ -118,7 +123,7 @@ console.log(formModal);
     const handleFacebookSignIn=async()=>{
         try {
             await facebookSignIn();
-            setShowRegistrationForm(false);
+            setFormModal(false);
         } catch (error) {
             console.log(error);
         }
@@ -134,6 +139,7 @@ console.log(formModal);
             setError('');
             setShowError(false);
             setShowRegistrationForm(false);
+            setFormModal(false);
             setShowOtp(true);
             generateRecaptcha();
             let appVerifier= window.recaptchaVerifier;
@@ -164,6 +170,7 @@ console.log(formModal);
             const user = result.user;
             setShowOtp(false);
             setShowFinishSignIn(true);
+            
             // ...
             console.log(user);
         }).catch((error) => {
@@ -208,11 +215,12 @@ console.log(formModal);
     return (
     <>
     {formModal? <div className="sign-in-container">
-            <form onSubmit={showEmail?handleSubmit:handlePhone} className={showError?'shake':''} >
+            <form onSubmit={showEmail?handleSubmit:handlePhone} className={showError?'shake':''}>
+                <CloseIcon className="close-icon" onClick={()=>setFormModal(false)}/>
                 <h1 className="sign-in-container-header">Login or Sign Up</h1>
                 <hr />
                 <h1 className="sign-in-container-welcome">
-                    Welcome to Satovan{' '}{user.displayName}
+                    Welcome to Satovan
                 </h1>
         {!showEmail?  
             <div className="form-row">
@@ -396,11 +404,6 @@ console.log(formModal);
             <span className="auth-error-message">{showError?lastNameError:''}</span>
         </div>:''}
     
-
-
-
-
-
 
     <div id='recaptcha-container'></div>
     </>
