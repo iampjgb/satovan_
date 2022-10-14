@@ -19,12 +19,12 @@ function App() {
     <AuthContextProvider>
       <div className="App">
       <Navbar/>
-      <CategoryNav/>
-      <ServiceList/> 
+      {/* <CategoryNav/> */}
+      {/* <ServiceList/>  */}
       {/* <ServiceProviderAvatar/>
       <ServiceProviderOffers/> */}
       <SignIn/>
-      {/* <ChatComponent/> */}
+      <ChatComponent/>
     </div>
     </AuthContextProvider>
   );

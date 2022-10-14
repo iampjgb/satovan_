@@ -41,29 +41,31 @@ export const AuthContextProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            console.log("User", user);
+            // console.log("User", user);
             setDoc(doc(db, "users", user.uid), {
-                uid:user.uid,
+                uid: user.uid,
                 name: user.displayName,
                 email: user.email,
-                image:user.photoURL
+                image: user.photoURL
             });
         });
         return () => {
             unsubscribe();
         };
 
-        
+
     }, [user]);
 
-    return ( <AuthContext.Provider value = {
-            {googleSignIn,
-            facebookSignIn,
-            logOut,
-            user,
-            generateRecaptcha }
-        } > { children } 
-        </AuthContext.Provider>
+    return ( < AuthContext.Provider value = {
+            {
+                googleSignIn,
+                facebookSignIn,
+                logOut,
+                user,
+                generateRecaptcha
+            }
+        } > { children } <
+        /AuthContext.Provider>
     );
 };
 
