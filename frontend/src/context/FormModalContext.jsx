@@ -6,6 +6,7 @@ const FormModalContext = createContext();
 export const FormModalContextProvider = ({ children }) => {
     const [formModal, setFormModal] = useState(false);
     const [profileNavModal, setProfileNavModal] = useState(false);
+    const [proFormModal,setProFormModal]=useState(false);
 
     const handleFormModal=()=>{
         setFormModal(!formModal);
@@ -16,10 +17,14 @@ export const FormModalContextProvider = ({ children }) => {
         setProfileNavModal(!profileNavModal);
     }
 
+    const handleProFormModal=()=>{
+        setProFormModal(!proFormModal);
+    }
+
 
 
     return (
-        <FormModalContext.Provider value={{ formModal,setFormModal,handleFormModal,handleProfileNavModal,profileNavModal,setProfileNavModal }}>
+        <FormModalContext.Provider value={{ formModal,setFormModal,handleFormModal,handleProfileNavModal,profileNavModal,setProfileNavModal,handleProFormModal,proFormModal }}>
             {children}
         </FormModalContext.Provider>
     );

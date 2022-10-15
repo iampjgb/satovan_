@@ -2,6 +2,7 @@ import { Navbar } from "./components/Navbar/Navbar";
 import { SearchBar } from "./components/SearchBar/SearchBar";
 import { CategoryNav } from "./components/CategoryNav/CategoryNav";
 import { ServiceList } from "./components/ServiceList/ServiceList";
+import {ProSignIn} from "./components/ProSignIn/ProSignIn";
 import { ServiceProviderAvatar } from "./components/ServiceProviderPage/ServiceProviderAvatar.jsx";
 import { ServiceProviderOffers } from "./components/ServiceProviderPage/ServiceProviderOffers";
 import '@fontsource/roboto/300.css';
@@ -23,8 +24,9 @@ function App() {
       {/* <ServiceList/>  */}
       {/* <ServiceProviderAvatar/>
       <ServiceProviderOffers/> */}
-      <SignIn/>
-      <ChatComponent/>
+      {/* <SignIn/> */}
+      <ProSignIn/>
+      {/* <ChatComponent/> */}
     </div>
     </AuthContextProvider>
   );

@@ -9,26 +9,32 @@ import CloseIcon from "@mui/icons-material/Close";
 import CallIcon from "@mui/icons-material/Call";
 import VideocamIcon from "@mui/icons-material/Videocam";
 
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
-
-import { doc,  setDoc,onSnapshot, collection, query, where,serverTimestamp,orderBy } from "firebase/firestore";
+import { doc,setDoc,getDocs,onSnapshot,updateDoc,getDoc, collection, query, where,serverTimestamp,orderBy,limit } from "firebase/firestore";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 //import UserAuth Context
 import { UserAuth } from "../../context/AuthContext";
 
 //import firebase auth initizialization and hooks
-import {auth,db} from '/Users/paulbaron/CAPSTONE/frontend/src/firebase.js';
+import {db} from '/Users/paulbaron/CAPSTONE/frontend/src/firebase.js';
 
 export const ChatComponent = () => {
     const [emoji, setEmoji] = useState(null);
     const [showEmojis, setShowEmojis] = useState(false);
     const [messages,setMessages]=useState([]);
     const [message,setMessage]=useState('');
+    const [showChat,setShowChat]=useState(true);
+    const [image,setImage]=useState(null);
+    const [imageUrl,setImageUrl]=useState(null);
+    const [percent,setPercent]=useState(0);
+    const [username,setUsername]=useState('');
+    const [searchedUser,setSearchedUser]=useState('');
+
     const dummy = useRef();
+    const storage=getStorage();
 
      //import functions and values from UserAuth Context
-    const{googleSignIn,facebookSignIn,user,generateRecaptcha}=UserAuth();
+    const{user}=UserAuth();
 
     const handleEmojis = () => {
         showEmojis ? setShowEmojis(false) : setShowEmojis(true);
@@ -37,7 +43,7 @@ export const ChatComponent = () => {
     } 
 
     useEffect(() => {
-    
+    console.log(user);
       const unsubscribe = onSnapshot(
         query(collection(db, `chats`), orderBy('timeStamp')),
         snapshot => {
@@ -48,54 +54,128 @@ export const ChatComponent = () => {
           );
         },
         err => {
-          // TODO: handle errors;
+        // console.log(err.message);
         }
       );
-  
       return () => unsubscribe();
-    }, []);
+    }, [user]);
 
-console.log(messages);
 
     const handleSubmit=async(e)=>{
       e.preventDefault();
 
-     // Add a new document with a generated id
-const messageRef = doc(collection(db, "chats"));
+      // Add a new document with a generated id
+      const messageRef = doc(collection(db, "chats"));
+      
+      console.log(imageUrl);
 
-// later...
-await setDoc(messageRef, {
-  uid:user.uid,
-  name:user.displayName,
-  message:message,
-  timeStamp:serverTimestamp()
-});
+      // later...
+      await setDoc(messageRef, {
+        uid:user.uid,
+        name:user.displayName,
+        message:message,
+        photoURL:user.photoURL,
+        timeStamp:serverTimestamp(),
+        image:imageUrl
+    });
 
-      setMessage('');
-      dummy.current.scrollIntoView({ behavior: 'smooth' });
+
+    setMessage('');
+    dummy.current.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const handleImageUpload=(e)=>{
+        setImage(e.target.files[0]);
+        console.log(image);
+        if (!image) {
+          alert("Please upload an image first!");
+      }
+
+      const storageRef = ref(storage, `${image.name}`);
+
+      // progress can be paused and resumed. It also exposes progress updates.
+      // Receives the storage reference and the file to upload.
+      const uploadTask = uploadBytesResumable(storageRef, image);
+
+      uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+              const percent = Math.round(
+                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+
+              // update progress
+              setPercent(percent);
+          },
+          (err) => console.log(err),
+          () => {
+              // download url
+              getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                  // console.log(url);
+                  setImageUrl(url);
+
+                // Add a new document with a generated id
+                const messageRef = doc(collection(db, "chats"));
+                  
+                console.log(imageUrl);
+
+                // later...
+                setDoc(messageRef, {
+                  uid:user.uid,
+                  name:user.displayName,
+                  message:message,
+                  photoURL:user.photoURL,
+                  timeStamp:serverTimestamp(),
+                  image:imageUrl
+              });
+
+              // setImageUrl('');
+              });
+          }
+      );
     }
-
-
-
     
+
+    const handleSearch = async () => {
+      const q = query(collection(db, "users"),
+      where("name", "==",username));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+      setSearchedUser(doc.data());    
+        });
+    };
+  
+    const handleKey = (e) => {
+      e.code === "Enter" && handleSearch();
+    };
+
+
+    console.log(searchedUser);
+
+
     return (
         <div className="chat-container">
+          {percent}
             <div className="chat-wrapper">
                 <div className="left-bar">
                     <div className="left-bar-header">{/* nothing.... */}</div>
                     <div className="left-bar-searchbox">
-                        <input type="search" placeholder="Search chat" />
+                        <input type="search" placeholder="Search chat"
+                        onKeyDown={handleKey}
+                        onChange={(e) =>
+                        setUsername(e.target.value)}/>
                     </div>
                     <div className="left-bar-chatheads">
                         <div className="left-bar-chathead">
                             <div className="left-bar-chathead-avatar">
                                 <img
-                                    src={require("/Users/paulbaron/CAPSTONE/frontend/src/assets/services/carpenter.webp")}
+                                    src={searchedUser?.image}
                                     alt=""
                                 />
                             </div>
                             <div className="left-bar-chat-head-content">
-                                <span>Mr. Karpintero</span>
+                                <span>{searchedUser?.name}</span>
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur
                                     adipisicing elit. Expedita quo ut,
@@ -113,11 +193,11 @@ await setDoc(messageRef, {
                         <div className="right-bar-header-avatar">
                             <div className="profile">
                                 <img
-                                    src={require("/Users/paulbaron/CAPSTONE/frontend/src/assets/services/carpenter.webp")}
-                                    alt="Mr. Karpintero"
+                                    src={searchedUser?.image}
+                                    alt={searchedUser?.name}
                                 />
                             </div>
-                            <span>Mr. Karpintero</span>
+                            <span>{searchedUser?.name}</span>
                         </div>
                         <div className="right-bar-header-icons">
                             <CallIcon />
@@ -127,22 +207,21 @@ await setDoc(messageRef, {
                     </div>
                     <div className="right-bar-contents">
                         {/* chat message */}
-                        <div className="right-bar-content">
-                            <div className="right-bar-avatar">
-                                <img
-                                    src={require("/Users/paulbaron/CAPSTONE/frontend/src/assets/services/carpenter.webp")}
-                                    alt=""
-                                />
-                            </div>
-                            <div className="right-bar-messages">
-                                {messages.map((data)=>(
-                                  <div key={data.timeStamp}>
-                                      <p>{data.message}</p>
-                                  </div>
-                                ))}
-                                <span ref={dummy}></span>
-                            </div>
+                      {messages.map((msg=>(
+                      <div className={msg.uid===user?.uid?"right-bar-content sent":"right-bar-content"} key={msg?.id}>
+                        <div className="right-bar-avatar">
+                            <img
+                                src={msg?.photoURL}
+                                alt={msg?.displayName}
+                            />
                         </div>
+                        <div className="right-bar-messages ">
+                          {msg?.message===''?'': <p>{msg?.message}</p>}
+                            <img src={msg?.image } alt="" />
+                        </div>
+                    </div>
+                      )))}
+                    <span ref={dummy}></span>
                     </div>
                     <form className="right-bar-chatbox" onSubmit={handleSubmit}>
                         <div className="right-bar-chatbox-input">
@@ -155,6 +234,7 @@ await setDoc(messageRef, {
                                 id="image"
                                 style={{ display: "none" }}
                                 accept="image/*"
+                                onChange={handleImageUpload}
                             />
                             <label htmlFor="image">
                                 <ImageIcon className="image-icon" />

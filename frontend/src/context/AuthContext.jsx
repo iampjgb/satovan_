@@ -12,6 +12,7 @@ import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 const AuthContext = createContext();
+const tempProfile='https://www.marismith.com/wp-content/uploads/2014/07/facebook-profile-blank-face.jpeg';
 
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState({});
@@ -42,11 +43,11 @@ export const AuthContextProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             // console.log("User", user);
-            setDoc(doc(db, "users", user.uid), {
-                uid: user.uid,
-                name: user.displayName,
-                email: user.email,
-                image: user.photoURL
+            setDoc(doc(db, "users", user?.uid), {
+                uid: user?.uid,
+                name: user?.displayName,
+                email: user?.email,
+                image: user?.photoURL||tempProfile
             });
         });
         return () => {
@@ -64,8 +65,7 @@ export const AuthContextProvider = ({ children }) => {
                 user,
                 generateRecaptcha
             }
-        } > { children } <
-        /AuthContext.Provider>
+        } > { children } </AuthContext.Provider>
     );
 };
 
