@@ -1,84 +1,74 @@
-import './payment.scss';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { useState } from 'react';
+import { useState } from "react";
+import { loadStripe } from "@stripe/stripe-js";
 
-export const Payment = () => {
+import "./payment.scss";
 
-    const [showGcash,setShowGcash]=useState(false);
-    const [showCreditCard,setShowCreditCard]=useState(true);
+let stripePromise;
 
-    
-    const handleOption=(e)=>{
-        if(e.target.value==='credit-card'){
-            setShowGcash(false);
-            setShowCreditCard(true);
-        } else if(e.target.value==='gcash-paymaya'){
-            setShowGcash(true);
-            setShowCreditCard(false);
-        }
+const getStripe = () => {
+    if (!stripePromise) {
+        stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
     }
 
+    return stripePromise;
+};
+
+export const Payment = () => {
+    const [stripeError, setStripeError] = useState(null);
+    const [isLoading, setLoading] = useState(false);
+    const item = {
+        price: "price_1LtMGqL4mhlhx7FcPcBBOZCQ",
+        quantity: 1,
+    };
+
+    const checkoutOptions = {
+        lineItems: [item],
+        mode: "payment",
+        successUrl: `${window.location.origin}/success`,
+        cancelUrl: `${window.location.origin}/cancel`,
+    };
+    console.log(checkoutOptions);
+    const redirectToCheckout = async () => {
+        setLoading(true);
+        console.log("redirectToCheckout");
+
+        const stripe = await getStripe();
+        const { error } = await stripe.redirectToCheckout(checkoutOptions);
+        console.log("Stripe checkout error", error);
+
+        if (error) setStripeError(error.message);
+        setLoading(false);
+    };
+
+    if (stripeError) alert(stripeError);
+
     return (
-        <div className='payment'>
-        <div className='header'>
-            <span className='content'>Choose your payment method:</span>
+        <div className="checkout">
+            <h1>Stripe Checkout</h1>
+            <p className="checkout-title">Design+Code React Hooks Course</p>
+            <p className="checkout-description">
+                Learn how to build a website with React Hooks
+            </p>
+            <h1 className="checkout-price">{item.price}</h1>
+            <img
+                className="checkout-product-image"
+                src={require("https://github.com/iampjgb/satovan_/blob/97a6dde361bf6985a71d16ad7f64482a09a4617e/frontend/src/assets/carpenter.png")}
+                alt="Product"
+            />
+            <button
+                className="checkout-button"
+                onClick={redirectToCheckout}
+                disabled={isLoading}
+            >
+                {/* <div className="grey-circle">
+          <div className="purple-circle">
+            <img className="icon" src={CardIcon} alt="credit-card-icon" />
+          </div>
+        </div> */}
+                <div className="text-container">
+                    <p className="text">{isLoading ? "Loading..." : "Buy"}</p>
+                </div>
+            </button>
         </div>
-        <div className='options'>
-            <div className='item'>
-                <label>Credit/Debit Card</label>
-                <input type="radio" name='card' value='credit-card' onChange={handleOption} defaultChecked  />
-            </div>
-            <div className='item'>
-                <label>Gcash/Paymaya</label>
-                <input type="radio"name='card' value='gcash-paymaya'onChange={handleOption} />
-            </div>
-        </div>
-        {!showCreditCard? "":<div className='card-inputs'>
-            <div className='item'>
-                <label>Credit Card Number</label>
-                <div className='card-group'>
-                    <input type="number" placeholder='Enter your card number' autoFocus pattern="[0-9]"/>
-                    <div className='images'>
-                        <img src={require('/Users/paulbaron/CAPSTONE/frontend/src/assets/cards/amex.jpeg')} alt="amex" />
-                        <img src={require('/Users/paulbaron/CAPSTONE/frontend/src/assets/cards/visa.png')} alt="visa" />
-                        <img src={require('/Users/paulbaron/CAPSTONE/frontend/src/assets/cards/mastercard.png')} alt="mastercard" />
-                    </div>
-                </div>
-            </div>
-            <div className='item'>
-                <label>Name on Card</label>
-                <div className='card-group'>
-                    <input type="text" placeholder="Enter Cardholder's Name"  />
-                </div>
-            </div>
-            <div className='item-group'>
-                <div className='item'>
-                    <label>CVV No.</label>
-                    <input type="number"  placeholder='3-4 digits' min="4"/>
-                </div>
-                <div className='item'>
-                    <label>Expiration</label>
-                    <input type="number"  placeholder='mm/yy' maxLength="4"/>
-                </div>
-            </div>
-        </div>}
-    {!showGcash?"": <div className='gcash-paymaya'>
-            <div className='item'>
-                <label>Gcash/Paymaya</label>
-                <div className='card-group'>
-                    <button>+63</button>
-                    <input type="number" placeholder='Enter your phone' pattern="[0-9]"/>
-                    <div className='images-local'>
-                        <img src={require('/Users/paulbaron/CAPSTONE/frontend/src/assets/cards/gcash.png')} alt="gcash" />
-                        <img src={require('/Users/paulbaron/CAPSTONE/frontend/src/assets/cards/paymaya.png')} alt="paymaya" />
-                    </div>
-                </div>
-            </div>
-        </div>}
-        <div className='btn-pay'>
-            <button className='item'>Pay P2,200.00</button>
-        </div>
-    </div>
-    )
-}
+    );
+};

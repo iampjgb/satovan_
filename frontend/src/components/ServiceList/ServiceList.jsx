@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './serviceList.scss';
 import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'PHP',
 });
+
 
 
 const serviceItems=[
@@ -86,7 +86,12 @@ const serviceItems=[
     
 ];
 
+
 export const ServiceList = () => {
+
+const [favorited,setFavorited]=useState('');
+
+console.log(favorited);
     return (
     <div className='serviceList'>
         {serviceItems.map((service)=>(
@@ -103,8 +108,8 @@ export const ServiceList = () => {
                     <span className='star-rate'>{service.rate} ({service.rateCount})</span> 
                 </div>
             </div>
-            <div className='item-heart'>
-                <FavoriteIcon className='item-heart-icon'/>
+            <div className='item-heart' onClick={()=>setFavorited(service.id)}>
+                <FavoriteIcon className={favorited===service.id?'item-heart-icon favorited':'item-heart-icon'}/>
             </div>
         </div>
         ))}

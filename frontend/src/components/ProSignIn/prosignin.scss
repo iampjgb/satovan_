@@ -1,271 +1,95 @@
-$base-color: #A763FF;
-$base-box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-body,
-html {
-    min-height: 100vh;
-    min-width: 100vw;
-}
-
-@mixin mobile {
-    @media screen and (max-width: 480px) {
-        @content
-    }
-}
-
-@mixin tablet {
-    @media screen and (max-width: 768px) {
-        @content
-    }
-}
-
-@mixin laptop {
-    @media screen and (max-width: 1200px) {
-        @content
-    }
-}
-
-// body * {
-//     border: 1px solid pink;
-// }
-.sign-in-container {
-    z-index: 0;
+.proSignIn {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    @include mobile {
-        max-width: 100vw;
-        height: 100vh;
-    }
-    form {
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
-        background-color: white;
-        padding: 30px;
-        border-radius: 30px;
-        box-shadow: $base-box-shadow;
-        min-width: 360px;
-        .close-icon {
-            cursor: pointer;
-            &:hover {
-                background-color: lightgray;
-                border-radius: 50%;
-            }
-        }
-        hr {
-            border: 0.5px solid lightgray;
-            @include tablet {
-                display: none;
-            }
-        }
-        .sign-in-container-header {
-            font-size: 14px;
-            font-weight: normal;
+    max-height: calc(100vh - 80px);
+    width: 100vw;
+    background-color: whitesmoke;
+    gap: 20px;
+    .left-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rebeccapurple;
+        color: white;
+        flex-wrap: wrap;
+        width: 50%;
+        opacity: 1;
+        transition: opacity 3s;
+        p {
+            font-size: 50px;
             text-align: center;
-            margin-top: 5px;
-        }
-        .sign-in-container-welcome {
-            font-size: 24px;
             font-weight: 400;
-            padding: 10px 0px 10px 0px;
-            text-align: center;
         }
-        .form-row {
+    }
+    .right-bar {
+        width: 50%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 100px 20px 100px 20px;
+        position: relative;
+        .item {
             display: flex;
             flex-direction: column;
-            border: 1px solid lightgray;
-            // border-radius: 10px;
-            padding: 5px;
-            font-size: 12px;
-            input[type=date] {
-                text-align: center;
-                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-                display: block;
-                margin: auto;
-            }
-            label {
-                color: gray;
-                font-size: 12px;
-                margin-left: 2px;
-            }
-            .country-dropdown,
-            .phone-number {
-                padding: 5px 36px 5px 0px;
-                text-align-last: left;
-                border: none;
-                outline: none;
-                font-size: 14px;
-                align-self: center;
-                width: 100%;
-            }
-            .phone-group {
-                display: flex;
-                align-items: center;
-                div {
-                    padding: 10px;
-                    span {
-                        flex: 1;
-                        text-align: center;
-                        color: #262626;
-                        display: inline-block;
-                        font-size: 14px;
-                    }
-                }
-                input[type=number] {
-                    flex: 8;
-                    border-left: 1px solid lightgray;
-                    width: 100%;
-                    color: #262626;
-                }
-            }
-        }
-        .auth-btn {
-            margin: 10px 0px 10px 0px;
-            display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            img {
-                width: 30px;
-                height: 30px;
-                object-fit: cover;
-                padding: 0px 10px 0px 10px;
-                // flex: 2;
-            }
-            span {
-                text-align: center;
-                // flex: 1;
-            }
-            &.other-auth {
-                border: 1px solid gray;
-                padding: 5px;
-                font-size: 12px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                .auth-logo {
-                    flex-basis: 2;
-                }
-                .auth-description {
-                    flex-basis: 10;
-                }
-            }
-            &:hover {
-                background-color: lightgray;
-            }
-            .phone-auth-btn {
-                background-color: $base-color;
-                color: white;
-                border: none;
-                padding: 15px 10px;
-                font-weight: bold;
-                width: 100%;
-                font-size: 16px;
-                // border-radius: 15px;
-                cursor: pointer;
-            }
-        }
-        .phone-horizontal-line {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            color: gray;
-            font-size: 12px;
-            .hr {
-                border: 0.5px solid lightgray;
-                width: 48%;
-            }
-            span {
-                padding: 5px;
-            }
-        }
-    }
-    .auth-error-message {
-        color: red;
-        font-size: 12px;
-    }
-}
-
-.otp-container {
-    left: 50%;
-    top: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    padding: 30px;
-    box-shadow: $base-box-shadow;
-    border-radius: 30px;
-    background-color: white;
-    form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        .arrowback-icon {
-            font-size: 16px;
-            align-self: flex-start;
-            cursor: pointer;
-            font-weight: bolder;
-        }
-        span {
-            color: gray;
             font-weight: bold;
-        }
-        .otp-row {
-            display: flex;
-            .otp-group-btn {
-                input {
-                    //
-                    flex: 30%;
-                    text-align: center;
-                    padding: 10px;
-                    font-size: 16px;
+            gap: 20px;
+            cursor: pointer;
+            span {
+                text-transform: capitalize;
+                font-size: 18px;
+            }
+            img {
+                width: 44px;
+                height: auto;
+                transition: all .3s;
+                padding: 12px;
+                &:hover {
+                    background-color: white;
+                    border-radius: 50%;
                 }
-                button {
+            }
+            &.time {
+                padding: 10px 15px;
+                border: 1px solid rebeccapurple;
+                background-color: whitesmoke;
+                color: rebeccapurple;
+                border-radius: 20px;
+            }
+        }
+        .nav-buttons {
+            position: absolute;
+            bottom: 3%;
+            // padding: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            gap: 500px;
+             :nth-child(1) {
+                border: none;
+                border-bottom: 1px solid black;
+                background-color: whitesmoke;
+                &:hover {
                     background-color: black;
                     color: white;
-                    flex: 70%;
-                    padding: 10px 15px;
-                    font-weight: bold;
-                    font-size: 16px;
-                    cursor: pointer;
                 }
+            }
+             :nth-child(2) {
+                background-color: black;
+                color: white;
+                opacity: (.8);
+                &:hover {
+                    opacity: (1);
+                }
+            }
+            button {
+                padding: 10px 15px;
+                width: 100px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: 0.3s;
             }
         }
     }
-}
-
-.shake {
-    animation: shake 0.3s;
-    animation-iteration-count: 2;
-}
-
-@keyframes shake {
-    0% {
-        transform: translate(1px, 1px) rotate(0deg);
-    }
-    20% {
-        transform: translate(-3px, 0px) rotate(1deg);
-    }
-    40% {
-        transform: translate(1px, -1px) rotate(1deg);
-    }
-    60% {
-        transform: translate(-3px, 1px) rotate(0deg);
-    }
-    80% {
-        transform: translate(-1px, -1px) rotate(1deg);
-    }
-    100% {
-        transform: translate(1px, -2px) rotate(-1deg);
-    }
-}
-
-.space {
-    margin: 30px 0 30px 0;
 }

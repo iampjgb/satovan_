@@ -12,6 +12,9 @@ import '@fontsource/roboto/700.css';
 import { ChatComponent } from "./components/ChatComponent/ChatComponent";
 import { SignIn } from "./components/SignIn/SignIn";
 import { AuthContextProvider } from "./context/AuthContext";
+import { Payment } from "./components/ServiceProviderPage/Payment";
+import { Stripe } from "@stripe/stripe-js";
+import { Book } from "./components/Book/Book";
 
 
 
@@ -20,15 +23,19 @@ function App() {
     <AuthContextProvider>
       <div className="App">
       <Navbar/>
-      {/* <CategoryNav/> */}
-      {/* <ServiceList/>  */}
+      <CategoryNav/>
+      <ServiceList/> 
+      {/* <Payment/> */}
+      {/* <Book/> */}
       {/* <ServiceProviderAvatar/>
       <ServiceProviderOffers/> */}
-      {/* <SignIn/> */}
-      <ProSignIn/>
+      <SignIn/>
+      {/* <ProSignIn/> */}
       {/* <ChatComponent/> */}
     </div>
+    
     </AuthContextProvider>
+    
   );
 }
 

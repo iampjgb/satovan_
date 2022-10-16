@@ -13,7 +13,7 @@ $base-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     position: relative;
     .chat-wrapper {
         display: flex;
-        width: 50%;
+        width: 42%;
         height: 85%;
         box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
         border-radius: 30px;
@@ -24,6 +24,7 @@ $base-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            width: 220px;
             .left-bar-header {
                 width: 85%;
                 background-color: #4E2A84;
@@ -107,6 +108,7 @@ $base-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
             border-bottom-right-radius: 30px;
             display: flex;
             flex-direction: column;
+            width: 100px;
             .right-bar-header {
                 width: 100%;
                 display: flex;

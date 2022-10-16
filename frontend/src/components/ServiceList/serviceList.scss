@@ -67,6 +67,10 @@ rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
             // color: #EF4C62;
             color: #edede8;
             cursor: pointer;
+            &.favorited {
+                color: #ED4B61;
+                // background-color: pink;
+            }
         }
     }
 }
